@@ -1,0 +1,1 @@
+            <SectionTitle title={"🏆 " + t("winnerZone")} />

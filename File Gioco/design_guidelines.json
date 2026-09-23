@@ -1,0 +1,171 @@
+{
+  "app_name": "Lega Calcio Manager",
+  "personality": "1 iOS-Native Clean with Glass/Luxe elevated moments for live matches",
+  "personality_one_liner": "An elegant, clean, and prestigious football simulator celebrating the Italian style with azure and gold accents.",
+  "color": {
+    "surface": "#F8FAFC",
+    "onSurface": "#0F172A",
+    "surfaceSecondary": "#FFFFFF",
+    "onSurfaceSecondary": "#1E293B",
+    "surfaceTertiary": "#F1F5F9",
+    "onSurfaceTertiary": "#334155",
+    "surfaceInverse": "#0F172A",
+    "onSurfaceInverse": "#F8FAFC",
+    "brand": "#0284C7",
+    "brandPrimary": "#0284C7",
+    "onBrandPrimary": "#FFFFFF",
+    "brandSecondary": "#D4AF37",
+    "onBrandSecondary": "#1A1A1A",
+    "brandTertiary": "#E0F2FE",
+    "onBrandTertiary": "#0369A1",
+    "success": "#10B981",
+    "onSuccess": "#FFFFFF",
+    "warning": "#F59E0B",
+    "onWarning": "#FFFFFF",
+    "error": "#EF4444",
+    "onError": "#FFFFFF",
+    "info": "#3B82F6",
+    "onInfo": "#FFFFFF",
+    "border": "#E2E8F0",
+    "borderStrong": "#CBD5E1",
+    "divider": "#F1F5F9",
+    "muted": "#64748B",
+    "onBrand": "#FFFFFF"
+  },
+  "typography": {
+    "displayFontFamily": "Space Grotesk",
+    "textFontFamily": "Geist",
+    "scale": {
+      "sm": 12,
+      "base": 14,
+      "lg": 16,
+      "xl": 20,
+      "2xl": 24
+    }
+  },
+  "spacing": {
+    "rule": "Generous vertical spacing, 16px screen padding, native rhythmic spacing for lists. Avoid dense dashboard grids unless strictly showing the standings table.",
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "2xl": 32,
+    "3xl": 48
+  },
+  "radius_tokens": {
+    "sm": 6,
+    "md": 12,
+    "lg": 20,
+    "pill": 999
+  },
+  "shadow_tier": "1",
+  "navigation": "bottom_tabs",
+  "icon_set": "Ionicons",
+  "glassmorphism": {
+    "enabled": "true",
+    "do's": [
+      "Use glassmorphism for the sticky match ticker during the 90-second live simulation",
+      "Use glassmorphism for the bottom tab bar",
+      "Use glassmorphism for sticky header of the Championship Standings table"
+    ],
+    "dont's": [
+      "Never blur standard player list rows or settings forms",
+      "Do not blur the background of team creation cards"
+    ]
+  },
+  "platform_libraries": {
+    "glass": {
+      "ios": "expo-glass-effect",
+      "android": "expo-blur",
+      "low_end_android_fallback": "solid surfaceSecondary"
+    },
+    "image": "expo-image",
+    "blur": "expo-blur",
+    "bottom_sheet": "@gorhom/bottom-sheet",
+    "animation": "react-native-reanimated",
+    "gesture": "react-native-gesture-handler"
+  },
+  "haptics": {
+    "events": {
+      "goal_scored": "heavy",
+      "match_start": "medium",
+      "match_end": "medium",
+      "tab_press": "light",
+      "player_stat_slider_adjust": "selection",
+      "team_saved": "success"
+    }
+  },
+  "screens": [
+    {
+      "name": "Dashboard / Home",
+      "purpose": "Overview of the active league, upcoming matchday, and quick access to next actions.",
+      "states": {
+        "loading": "Spinner in the center",
+        "empty": "Illustration with 'Crea la tua prima squadra' (Create your first team) CTA.",
+        "error": "Failed to load league data. Retry."
+      },
+      "layout": "Hero image of a stadium overlaid with a gradient-to-dark scrim. Below it, a clean summary card of the active league, showing the top 3 standings in a minimalist table layout, and a prominent 'Next Matchday' card."
+    },
+    {
+      "name": "Team & Roster Management",
+      "purpose": "CRUD interface for the 12-20 teams and up to 20 players per team.",
+      "states": {
+        "loading": "Skeleton list of teams",
+        "empty": "No teams created. Large 'Add Team' CTA.",
+        "error": "Error loading teams."
+      },
+      "layout": "A two-column grid of team cards (showing team name, global strength 1-100, and a generated badge/initials on a brandTertiary circle). Tapping a team opens a detail view with a list of players. Player creation uses native sliders for Forza Gol, Assist, and Fallosità (1-30)."
+    },
+    {
+      "name": "Live Simulation & Matches",
+      "purpose": "View matchday fixtures, start instant simulation, or watch the 90-second live viewer.",
+      "states": {
+        "loading": "Preparing matches...",
+        "empty": "No fixtures available (Season over or not generated).",
+        "error": "Error generating matches."
+      },
+      "layout": "List of fixtures for the current matchday. A sticky bottom CTA to 'Avvia Simulazione' (Start Simulation). When live simulation starts, a modal or dedicated screen opens with a sticky 90-second clock (Space Grotesk font) at the top. Matches are displayed in a list of live score tickers updating in real-time. Goals and cards appear with a subtle animation and haptic feedback."
+    },
+    {
+      "name": "Match Detail",
+      "purpose": "View the timeline and statistics of a completed or live match.",
+      "states": {
+        "loading": "Loading stats...",
+        "empty": "Match hasn't started.",
+        "error": "Unable to fetch match details."
+      },
+      "layout": "A header showing the final score. Below it, a chronological timeline (using dividers and small icons) of goals (⚽), assists, and cards (🟨/🟥) with exact minutes. Player names and minutes are cleanly aligned."
+    },
+    {
+      "name": "Rankings (Classifiche)",
+      "purpose": "Segmented control between General Table, Top Scorers, and Top Assists.",
+      "states": {
+        "loading": "Loading table...",
+        "empty": "No data yet. Play a match to see standings.",
+        "error": "Error loading rankings."
+      },
+      "layout": "Sticky header with glassmorphism containing a segmented control. The General Table uses a tight list layout (Pos, Team, Pts, W, D, L, GD). The Top Scorers/Assists views use a standard list with player name, team name (muted), and the stat prominent on the right."
+    }
+  ],
+  "images": {
+    "hero_stadium": {
+      "url": "https://images.unsplash.com/photo-1706675780107-7c43cc487928?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwyfHxmb290YmFsbCUyMHN0YWRpdW0lMjBwaXRjaHxlbnwwfHx8fDE3OTAwOTczNTZ8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Football stadium pitch at night"
+    },
+    "empty_state_texture": {
+      "url": "https://images.pexels.com/photos/6563056/pexels-photo-6563056.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "alt": "Abstract blue and gold texture for empty state backdrop"
+    }
+  },
+  "instructions_to_main_agent": [
+    "Design an Italian-style football simulation app emphasizing a clean, elegant aesthetic (iOS-Native Clean) using an 'azzurrino e oro' (azure and gold) palette as the user explicitly requested.",
+    "Implement local device storage (AsyncStorage/Zustand persist) for all state (Teams, Players, League progress, Matches) since no login is required.",
+    "For the Live Simulation Viewer (90-second realtime feature): Build a robust interval-based timer where 1 second = 1 minute. Ensure all matches update parallelly. Trigger haptic feedback (`goal_scored` heavy impact) when a goal occurs.",
+    "In Team Roster Management: Player attributes (Forza Gol, Percentuale Assist, Fattore Fallosità) scale from 1 to 30. Use native sliding components (`@react-native-community/slider` or similar) for an intuitive input experience.",
+    "Match Detail Timeline: Structure the timeline chronologically with exact minutes for goals, assists, and cards. Use clear, distinct icons (Soccer ball for goal, colored squares for cards).",
+    "League Table (Classifica): Ensure horizontal scanning is clean. Use sticky headers for table columns (Pos, Squadra, PT, G, V, N, P, DR). Use `Space Grotesk` or the configured mono-like display font for tabular numbers so scores and points align perfectly.",
+    "Apply the gradient-to-dark scrim pattern (Layer 1: expo-linear-gradient, vertical, transparent to surfaceInverse) strictly on the Hero stadium image to guarantee white text readability.",
+    "Language selection (IT/EN) should be globally available and immediately re-render strings (using i18n-js or simple context)."
+  ]
+}
